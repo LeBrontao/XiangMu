@@ -6,6 +6,7 @@ using System;
 
 public class Player : MonoBehaviour
 {
+    public Animator playerAnimator;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -25,20 +26,26 @@ public class Player : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if(Physics.Raycast(ray,out hit))
+            if (Physics.Raycast(ray, out hit))
             {
                 agent.SetDestination(hit.point);
             }
         }
-        if(agent.remainingDistance==0)
+        if (agent.remainingDistance == 0)
         {
             animator.Play("HumanoidIdle");
         }
         else
         {
-            animator.Play("HumanoidRun");
+            IsShow();
         }
 
+
+    }
+
+    void IsShow()
+    {
+        playerAnimator.SetBool("HumanoidRun", true);
 
     }
 }
